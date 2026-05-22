@@ -13,7 +13,7 @@ A modern and visually engaging To-Do application with smart productivity feature
 - 🎉 Completion feedback animation
 
 ## 🖼️ Preview
-(Add screenshots here)
+![App Preview](Screenshot 2026-05-22 152055.png)
 
 ## 🌐 Live Demo
 https://smart-to-do.vercel.app
