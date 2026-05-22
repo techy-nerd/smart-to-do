@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Smart To-Do · Stay on Track</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+
+    <div class="bg-blob blob-1"></div>
+    <div class="bg-blob blob-2"></div>
+    <div class="bg-blob blob-3"></div>
+
+    <div class="app-wrapper">
+
+      <!-- ===== HEADER ===== -->
+      <header class="app-header">
+        <div class="header-left">
+          <span class="logo-mark">✦</span>
+          <h1 class="app-title">My Tasks</h1>
+        </div>
+        <div class="header-right">
+          <div class="task-count-badge" id="taskCountBadge">0 tasks</div>
+          <div class="streak-badge" id="streakBadge" title="Daily completion streak">🔥 <span id="streakCount">0</span></div>
+          <!-- Dark mode toggle -->
+          <button class="theme-toggle" id="themeToggle" title="Toggle dark mode" aria-label="Toggle dark mode">
+            <span class="theme-icon" id="themeIcon">🌙</span>
+          </button>
+        </div>
+      </header>
+
+      <!-- ===== PLANT / GROWTH WIDGET ===== -->
+      <div class="plant-card" id="plantCard">
+        <div class="plant-glow" id="plantGlow"></div>
+        <div class="plant-body">
+          <div class="plant-emoji-wrap">
+            <div class="plant-emoji" id="plantEmoji">🌱</div>
+          </div>
+          <div class="plant-info">
+            <span class="plant-label" id="plantLabel">Just getting started</span>
+            <span class="plant-mood-msg" id="plantMoodMsg">Let's get started 💪</span>
+            <span class="plant-sub" id="plantSub">Complete tasks to grow your plant!</span>
+          </div>
+        </div>
+        <div class="plant-xp-bar">
+          <div class="plant-xp-fill" id="plantXpFill"></div>
+        </div>
+      </div>
+
+      <!-- ===== INPUT SECTION ===== -->
+      <section class="input-card">
+        <div class="input-row">
+          <input
+            type="text"
+            id="taskInput"
+            class="task-input"
+            placeholder="What needs to be done today?"
+            maxlength="120"
+            autocomplete="off"
+          />
+        </div>
+        <div class="input-controls">
+          <div class="priority-selector" id="prioritySelector">
+            <button class="priority-btn active" data-priority="high">
+              <span class="dot dot-high"></span>High
+            </button>
+            <button class="priority-btn" data-priority="medium">
+              <span class="dot dot-medium"></span>Medium
+            </button>
+            <button class="priority-btn" data-priority="low">
+              <span class="dot dot-low"></span>Low
+            </button>
+          </div>
+          <button class="add-btn" id="addTaskBtn">
+            <span class="btn-icon">+</span>
+            <span>Add Task</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- ===== MOOD + FILTER ROW ===== -->
+      <div class="toolbar-row">
+
+        <!-- Mood selector -->
+        <div class="mood-group">
+          <span class="toolbar-label">Mood:</span>
+          <div class="mood-btns">
+            <button class="mood-btn active" data-mood="all" title="Show everything">😐 All</button>
+            <button class="mood-btn" data-mood="lazy"       title="Show only low-priority tasks">😴 Lazy</button>
+            <button class="mood-btn" data-mood="productive" title="Prioritise high tasks">⚡ Productive</button>
+            <button class="mood-btn" data-mood="overwhelmed" title="Show just 2–3 tasks">😰 Overwhelmed</button>
+          </div>
+        </div>
+
+        <!-- Random picker -->
+        <button class="random-btn" id="randomBtn" title="Pick a random pending task">
+          🎲 What should I do?
+        </button>
+
+      </div>
+
+      <!-- ===== FILTER BAR ===== -->
+      <div class="filter-bar">
+        <span class="filter-label">Show:</span>
+        <div class="filter-btns">
+          <button class="filter-btn active" data-filter="all">All</button>
+          <button class="filter-btn" data-filter="high">🔴 High</button>
+          <button class="filter-btn" data-filter="medium">🟡 Medium</button>
+          <button class="filter-btn" data-filter="low">🟢 Low</button>
+          <button class="filter-btn" data-filter="done">✓ Done</button>
+        </div>
+        <button class="clear-done-btn" id="clearDoneBtn" title="Remove completed tasks">
+          Clear Done
+        </button>
+      </div>
+
+      <!-- ===== TASK LIST ===== -->
+      <main class="task-list-wrapper">
+        <ul class="task-list" id="taskList"></ul>
+        <div class="empty-state" id="emptyState">
+          <div class="empty-icon">☁️</div>
+          <p class="empty-heading">All clear!</p>
+          <p class="empty-sub">Add a task above to get started.</p>
+        </div>
+      </main>
+
+      <!-- ===== PROGRESS BAR ===== -->
+      <div class="progress-section" id="progressSection">
+        <div class="progress-info">
+          <span id="progressLabel">0 of 0 done</span>
+          <span id="progressPercent">0%</span>
+        </div>
+        <div class="progress-track">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+      </div>
+
+      <!-- ===== FOOTER ===== -->
+      <footer class="app-footer">
+        <span>crafted with <span class="heart">♥</span> by</span>
+        <span class="footer-name">Ayushi</span>
+      </footer>
+
+    </div>
+
+    <!-- Random picker spotlight overlay -->
+    <div class="spotlight-overlay" id="spotlightOverlay">
+      <div class="spotlight-card" id="spotlightCard">
+        <div class="spotlight-header">🎯 Focus on this!</div>
+        <p class="spotlight-task" id="spotlightTask"></p>
+        <div class="spotlight-meta" id="spotlightMeta"></div>
+        <button class="spotlight-close" id="spotlightClose">Got it ✓</button>
+      </div>
+    </div>
+
+    <div class="toast" id="toast"></div>
+
+    <script src="js/app.js"></script>
+  </body>
+</html>
